@@ -1,0 +1,256 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Funk Maker: browser-based beat sequencer with save/load (frontend plan)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement the main step-sequencer UI with 4+ tracks, grid step toggles, and transport (play/stop) + BPM controls.",
+      "acceptanceCriteria": [
+        "User can toggle steps on/off in a grid for multiple tracks.",
+        "User can press Play to hear the loop and Stop to stop playback.",
+        "User can change BPM and hear playback speed change accordingly.",
+        "There are at least 4 distinct tracks (e.g., kick, snare, hi-hat, clap/cowbell)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the main single-screen app composition (header + sequencer workspace) including the step grid, 4+ instrument tracks, Play/Stop controls, and BPM input/slider; wire all new components so nothing is orphaned."
+        },
+        {
+          "path": "frontend/src/components/sequencer/SequencerWorkspace.tsx",
+          "operation": "create",
+          "description": "Create a workspace container component that owns the local UI state for the active pattern (grid, bpm, track params) and renders TransportControls, TrackList, and StepGrid."
+        },
+        {
+          "path": "frontend/src/components/sequencer/StepGrid.tsx",
+          "operation": "create",
+          "description": "Create the step sequencer grid UI with clickable cells per track/step, including a clear visual for active steps and current playhead position."
+        },
+        {
+          "path": "frontend/src/components/sequencer/TransportControls.tsx",
+          "operation": "create",
+          "description": "Create Play/Stop controls and a BPM control (input + slider) that updates the active pattern BPM."
+        },
+        {
+          "path": "frontend/src/components/sequencer/TrackList.tsx",
+          "operation": "create",
+          "description": "Create the track strip UI listing at least 4 tracks (kick, snare, hi-hat, clap/cowbell) and per-track controls (label + mute + volume)."
+        },
+        {
+          "path": "frontend/src/types/music.ts",
+          "operation": "create",
+          "description": "Define frontend types/constants for tracks, steps, patterns-in-session (including bpm and per-track settings) to keep sequencer UI and audio engine consistent."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add in-browser audio playback using Web Audio with stable timing and per-track mute/volume controls.",
+      "acceptanceCriteria": [
+        "Playback uses Web Audio API (or equivalent browser-native audio) and does not require network calls.",
+        "Each track has a mute toggle and a volume slider that affects playback immediately.",
+        "Timing stays consistent across multiple loop cycles (no obvious drifting within a short session)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/audio/useSequencerAudio.ts",
+          "operation": "create",
+          "description": "Implement a Web Audio based sequencer engine hook (AudioContext lifecycle, lookahead scheduling, playhead ticking, per-track gain/mute) and expose play/stop plus setBpm and per-track parameter updates."
+        },
+        {
+          "path": "frontend/src/audio/drumVoices.ts",
+          "operation": "create",
+          "description": "Implement simple synthesized drum voices (kick/snare/hat/clap-cowbell) using oscillators/noise/envelopes so playback requires no external samples or network calls."
+        },
+        {
+          "path": "frontend/src/components/sequencer/SequencerWorkspace.tsx",
+          "operation": "modify",
+          "description": "Wire the sequencer UI state to the Web Audio hook: Play/Stop triggers audio transport, BPM updates tempo immediately, and per-track mute/volume controls affect playback immediately."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add in-session pattern management: create new patterns, rename, and switch among multiple patterns retaining independent grid state and BPM.",
+      "acceptanceCriteria": [
+        "User can create a new blank pattern from the UI.",
+        "User can rename a pattern.",
+        "User can switch between at least 3 patterns and each retains its own grid state and BPM."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/patterns/PatternManager.tsx",
+          "operation": "create",
+          "description": "Create a pattern management panel (list/select, New Pattern, Rename) that manages multiple patterns in-session and allows switching the active pattern."
+        },
+        {
+          "path": "frontend/src/state/usePatternSession.ts",
+          "operation": "create",
+          "description": "Create a session state hook/store to manage an array of patterns (at least 3 supported), active pattern selection, rename/new operations, and per-pattern BPM + grid retention."
+        },
+        {
+          "path": "frontend/src/components/sequencer/SequencerWorkspace.tsx",
+          "operation": "modify",
+          "description": "Integrate PatternManager with the sequencer UI so switching patterns updates the grid and bpm while preserving each pattern’s independent state."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add authenticated save/load UI flow that persists patterns per signed-in user via existing backend functions; show clear sign-in requirement when logged out.",
+      "acceptanceCriteria": [
+        "When not signed in, the UI clearly indicates saving requires sign-in and does not attempt backend writes.",
+        "When signed in, user can save a pattern and later load it after a page refresh.",
+        "Patterns are stored per-user (one user cannot access another user’s patterns).",
+        "Backend exposes methods to create/update/list/get/delete patterns for the authenticated principal."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create a Login/Logout button using the selected authorization component guidance (Internet Identity via existing hooks) and clear cached queries/state on logout. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "operation": "create",
+          "description": "Create a first-login profile setup dialog that prompts for a display name and calls getCallerUserProfile/saveCallerUserProfile. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useUserProfile.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for getCallerUserProfile and saveCallerUserProfile, following the selected authorization component guidance to avoid profile-setup modal flash. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/usePatternsRemote.ts",
+          "operation": "create",
+          "description": "Create React Query hooks to list and load user patterns (getAllPatterns, loadPattern) and a mutation to savePattern; handle authorization errors gracefully in UI messaging. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/patterns/CloudSaveLoadPanel.tsx",
+          "operation": "create",
+          "description": "Create a Save/Load panel that: (1) when logged out, shows an English message that saving requires sign-in and disables Save/Load actions; (2) when logged in, allows saving current pattern and loading from the user’s stored list."
+        },
+        {
+          "path": "frontend/src/components/sequencer/SequencerWorkspace.tsx",
+          "operation": "modify",
+          "description": "Wire CloudSaveLoadPanel to the active in-session pattern: map the current grid/bpm to the backend Pattern shape for save, and update local session state when loading a remote pattern."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add header auth area (LoginButton + user display name) and mount ProfileSetupDialog; ensure the main screen remains usable while logged out but clearly indicates cloud save requires sign-in."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Apply a coherent retro-funk visual theme across layout and controls, making primary actions prominent and the grid readable on desktop.",
+      "acceptanceCriteria": [
+        "The app has a distinct retro-funk style (not default/shadcn plain) applied consistently to layout and components.",
+        "Primary actions (Play/Stop/Save) are visually prominent and consistent.",
+        "The sequencer grid is clearly readable and usable on desktop sizes."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add global retro-funk theme styling (color variables, typography choices, spacing, button/grid styling helpers) using existing Tailwind/CSS variable approach; keep all user-facing text in English."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme tokens (e.g., custom funk palette, shadows/glow accents, font family tokens) to support the retro-funk theme consistently across components."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "create",
+          "description": "Create a themed layout shell (header + content container) that applies consistent spacing and a readable background overlay area for the sequencer grid."
+        },
+        {
+          "path": "frontend/src/components/sequencer/StepGrid.tsx",
+          "operation": "modify",
+          "description": "Refine grid visuals for readability (clear on/off states, hover/focus states, and playhead highlight) consistent with the retro-funk theme."
+        },
+        {
+          "path": "frontend/src/components/sequencer/TransportControls.tsx",
+          "operation": "modify",
+          "description": "Style primary actions (Play/Stop and Save-related affordances where applicable) to be visually prominent and consistent with the retro-funk theme."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Add an onboarding/help panel explaining how to use the sequencer (toggle steps, BPM, play/stop, save) in concise English.",
+      "acceptanceCriteria": [
+        "A visible Help/How it works entry exists on the main screen.",
+        "Instructions are concise and written in English.",
+        "Help content matches the actual controls present in the UI."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/help/HelpPanel.tsx",
+          "operation": "create",
+          "description": "Create a Help/How it works panel (inline or dialog) with concise English instructions aligned to the implemented controls: toggling steps, adjusting BPM, Play/Stop, and cloud save/load requiring sign-in."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire HelpPanel into the main screen with a clearly visible Help/How it works entry."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Wire generated branding/decorative images as static assets and render them in the UI without harming sequencer readability.",
+      "acceptanceCriteria": [
+        "Generated images are placed under frontend/public/assets/generated and referenced directly by the frontend.",
+        "Logo is visible in the app header or landing area.",
+        "Decorative background/texture (if provided) is applied without harming readability of the sequencer grid."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/funk-maker-logo.dim_512x256.png",
+          "operation": "create",
+          "description": "Add the generated retro-funk wordmark logo static asset at frontend/public/assets/generated/funk-maker-logo.dim_512x256.png."
+        },
+        {
+          "path": "frontend/public/assets/generated/funk-background-tile.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated seamless retro groove background tile static asset at frontend/public/assets/generated/funk-background-tile.dim_512x512.png."
+        },
+        {
+          "path": "frontend/public/assets/generated/funk-icons-sprite.dim_768x128.png",
+          "operation": "create",
+          "description": "Add the generated UI icons sprite static asset at frontend/public/assets/generated/funk-icons-sprite.dim_768x128.png."
+        },
+        {
+          "path": "frontend/src/components/layout/AppHeader.tsx",
+          "operation": "create",
+          "description": "Create an app header that renders the logo from frontend/public/assets/generated/funk-maker-logo.dim_512x256.png and includes space for login/profile and help entry."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "modify",
+          "description": "Apply the decorative background using frontend/public/assets/generated/funk-background-tile.dim_512x512.png in a way that preserves sequencer readability (e.g., subdued/overlayed behind the main content)."
+        },
+        {
+          "path": "frontend/src/components/sequencer/TransportControls.tsx",
+          "operation": "modify",
+          "description": "Use the icons sprite frontend/public/assets/generated/funk-icons-sprite.dim_768x128.png to decorate Play/Stop/Save/BPM controls while keeping labels accessible and readable."
+        },
+        {
+          "path": "frontend/src/components/sequencer/TrackList.tsx",
+          "operation": "modify",
+          "description": "Use the icons sprite frontend/public/assets/generated/funk-icons-sprite.dim_768x128.png to decorate Volume/Mute controls while preserving clarity and usability."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire AppShell + AppHeader so the logo is visible in the header/landing area and decorative assets are applied consistently across the app."
+        }
+      ]
+    }
+  ]
+}

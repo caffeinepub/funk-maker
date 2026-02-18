@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a \"funk maker\" app.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Retro-funk wordmark logo with a vinyl/disco motif (funk-maker-logo.dim_512x256.png)\n- Seamless retro groove background texture pattern (funk-background-tile.dim_512x512.png)\n- Set of 6 small retro audio UI icons (play, stop, save, bpm, volume, mute) in a consistent style (funk-icons-sprite.dim_768x128.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-funk-beat-making-ui-that-lets-a-user-compose-short-drum-groove-loops-using-a-step-sequencer-grid-with-at-least-4-instrument-tracks-play-stop-controls-and-bpm-control",
+      "title": "Create a funk beat-making UI that lets a user compose short drum/groove loops using a step sequencer (grid) with at least 4 instrument tracks, play/stop controls, and BPM control.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-in-browser-audio-playback-for-the-step-sequencer-using-built-in-web-audio-no-external-audio-services-including-basic-timing-stability-and-per-track-mute-volume-controls",
+      "title": "Implement in-browser audio playback for the step sequencer using built-in web audio (no external audio services), including basic timing stability and per-track mute/volume controls.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-pattern-management-in-the-ui-create-a-new-pattern-rename-it-and-switch-between-multiple-saved-patterns-within-the-session",
+      "title": "Add pattern management in the UI: create a new pattern, rename it, and switch between multiple saved patterns within the session.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-authenticated-saving-loading-of-patterns-to-the-backend-so-a-signed-in-user-can-persist-their-patterns-across-sessions",
+      "title": "Add authenticated saving/loading of patterns to the backend so a signed-in user can persist their patterns across sessions.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-and-apply-a-coherent-retro-funk-visual-theme-color-palette-typography-spacing-and-component-styling-and-use-it-consistently-across-the-app",
+      "title": "Design and apply a coherent retro-funk visual theme (color palette, typography, spacing, and component styling) and use it consistently across the app.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-simple-onboarding-help-panel-that-explains-how-to-create-a-beat-toggle-steps-adjust-bpm-play-stop-save-using-english-user-facing-text",
+      "title": "Add a simple onboarding/help panel that explains how to create a beat (toggle steps, adjust BPM, play/stop, save) using English user-facing text.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-images-to-support-branding-logo-and-light-ui-decoration-and-render-them-as-static-assets-from-frontend-public-assets-generated",
+      "title": "Add generated static images to support branding (logo) and light UI decoration, and render them as static assets from frontend/public/assets/generated.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a funk maker app (core functionality TBD).",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Funk Maker",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

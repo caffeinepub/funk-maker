@@ -1,0 +1,160 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-funk-beat-making-ui-that-lets-a-user-compose-short-drum-groove-loops-using-a-step-sequencer-grid-with-at-least-4-instrument-tracks-play-stop-controls-and-bpm-control",
+      "featureTitle": "Create a funk beat-making UI that lets a user compose short drum/groove loops using a step sequencer (grid) with at least 4 instrument tracks, play/stop controls, and BPM control.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sequencer/SequencerWorkspace.tsx",
+        "frontend/src/components/sequencer/StepGrid.tsx",
+        "frontend/src/components/sequencer/TrackList.tsx",
+        "frontend/src/components/sequencer/TransportControls.tsx",
+        "frontend/src/types/music.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-in-browser-audio-playback-for-the-step-sequencer-using-built-in-web-audio-no-external-audio-services-including-basic-timing-stability-and-per-track-mute-volume-controls",
+      "featureTitle": "Implement in-browser audio playback for the step sequencer using built-in web audio (no external audio services), including basic timing stability and per-track mute/volume controls.",
+      "files": [
+        "frontend/src/audio/drumVoices.ts",
+        "frontend/src/audio/useSequencerAudio.ts",
+        "frontend/src/components/sequencer/SequencerWorkspace.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-pattern-management-in-the-ui-create-a-new-pattern-rename-it-and-switch-between-multiple-saved-patterns-within-the-session",
+      "featureTitle": "Add pattern management in the UI: create a new pattern, rename it, and switch between multiple saved patterns within the session.",
+      "files": [
+        "frontend/src/components/patterns/PatternManager.tsx",
+        "frontend/src/components/sequencer/SequencerWorkspace.tsx",
+        "frontend/src/state/usePatternSession.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-authenticated-saving-loading-of-patterns-to-the-backend-so-a-signed-in-user-can-persist-their-patterns-across-sessions",
+      "featureTitle": "Add authenticated saving/loading of patterns to the backend so a signed-in user can persist their patterns across sessions.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/LoginButton.tsx",
+        "frontend/src/components/auth/ProfileSetupDialog.tsx",
+        "frontend/src/components/patterns/CloudSaveLoadPanel.tsx",
+        "frontend/src/components/sequencer/SequencerWorkspace.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-design-and-apply-a-coherent-retro-funk-visual-theme-color-palette-typography-spacing-and-component-styling-and-use-it-consistently-across-the-app",
+      "featureTitle": "Design and apply a coherent retro-funk visual theme (color palette, typography, spacing, and component styling) and use it consistently across the app.",
+      "files": [
+        "frontend/src/components/layout/AppShell.tsx",
+        "frontend/src/components/sequencer/StepGrid.tsx",
+        "frontend/src/components/sequencer/TransportControls.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-simple-onboarding-help-panel-that-explains-how-to-create-a-beat-toggle-steps-adjust-bpm-play-stop-save-using-english-user-facing-text",
+      "featureTitle": "Add a simple onboarding/help panel that explains how to create a beat (toggle steps, adjust BPM, play/stop, save) using English user-facing text.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/help/HelpPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-images-to-support-branding-logo-and-light-ui-decoration-and-render-them-as-static-assets-from-frontend-public-assets-generated",
+      "featureTitle": "Add generated static images to support branding (logo) and light UI decoration, and render them as static assets from frontend/public/assets/generated.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/AppHeader.tsx",
+        "frontend/src/components/layout/AppShell.tsx",
+        "frontend/src/components/sequencer/TrackList.tsx",
+        "frontend/src/components/sequencer/TransportControls.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "kind": "build_request",
+  "title": "Funk Maker: browser-based beat sequencer with save/load",
+  "projectName": "Funk Maker",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a funk beat-making UI that lets a user compose short drum/groove loops using a step sequencer (grid) with at least 4 instrument tracks, play/stop controls, and BPM control.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Make a funk maker app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can toggle steps on/off in a grid for multiple tracks.",
+        "User can press Play to hear the loop and Stop to stop playback.",
+        "User can change BPM and hear playback speed change accordingly.",
+        "There are at least 4 distinct tracks (e.g., kick, snare, hi-hat, clap/cowbell)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement in-browser audio playback for the step sequencer using built-in web audio (no external audio services), including basic timing stability and per-track mute/volume controls.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Make a funk maker app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Playback uses Web Audio API (or equivalent browser-native audio) and does not require network calls.",
+        "Each track has a mute toggle and a volume slider that affects playback immediately.",
+        "Timing stays consistent across multiple loop cycles (no obvious drifting within a short session)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add pattern management in the UI: create a new pattern, rename it, and switch between multiple saved patterns within the session.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Make a funk maker app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can create a new blank pattern from the UI.",
+        "User can rename a pattern.",
+        "User can switch between at least 3 patterns and each retains its own grid state and BPM."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add authenticated saving/loading of patterns to the backend so a signed-in user can persist their patterns across sessions.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Make a funk maker app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When not signed in, the UI clearly indicates saving requires sign-in and does not attempt backend writes.",
+        "When signed in, user can save a pattern and later load it after a page refresh.",
+        "Patterns are stored per-user (one user cannot access another user’s patterns).",
+        "Backend exposes methods to create/update/list/get/delete patterns for the authenticated principal."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Design and apply a coherent retro-funk visual theme (color palette, typography, spacing, and component styling) and use it consistently across the app.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Make a funk maker app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app has a distinct retro-funk style (not default/shadcn plain) applied consistently to layout and components.",
+        "Primary actions (Play/Stop/Save) are visually prominent and consistent.",
+        "The sequencer grid is clearly readable and usable on desktop sizes."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Add a simple onboarding/help panel that explains how to create a beat (toggle steps, adjust BPM, play/stop, save) using English user-facing text.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Make a funk maker app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A visible Help/How it works entry exists on the main screen.",
+        "Instructions are concise and written in English.",
+        "Help content matches the actual controls present in the UI."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add generated static images to support branding (logo) and light UI decoration, and render them as static assets from frontend/public/assets/generated.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Make a funk maker app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images are placed under frontend/public/assets/generated and referenced directly by the frontend.",
+        "Logo is visible in the app header or landing area.",
+        "Decorative background/texture (if provided) is applied without harming readability of the sequencer grid."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo).",
+    "Do not modify read-only paths listed as frontend immutablePaths; compose existing UI components instead of editing their sources.",
+    "Use English for all user-facing text."
+  ],
+  "nonGoals": [
+    "Advanced audio synthesis (e.g., full subtractive/FM synth engine).",
+    "MIDI import/export.",
+    "Real-time collaboration or presence features.",
+    "Integrations with third-party music services or external databases."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Retro-funk wordmark logo with a vinyl/disco motif (funk-maker-logo.dim_512x256.png)",
+      "Seamless retro groove background texture pattern (funk-background-tile.dim_512x512.png)",
+      "Set of 6 small retro audio UI icons (play, stop, save, bpm, volume, mute) in a consistent style (funk-icons-sprite.dim_768x128.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

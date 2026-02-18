@@ -1,0 +1,21 @@
+{
+  "frontend/src/App.tsx": "Main application component that wraps the app with ThemeProvider, renders AppShell with SequencerWorkspace, and includes ProfileSetupDialog and Toaster for notifications.",
+  "frontend/src/types/music.ts": "Defines core music types (Track, Pattern, SessionState) and utility functions for creating empty patterns/tracks and converting between frontend and backend pattern formats.",
+  "frontend/src/state/usePatternSession.ts": "Zustand store managing in-session pattern state including multiple patterns, active pattern selection, pattern creation/renaming, and pattern loading from backend.",
+  "frontend/src/audio/drumVoices.ts": "Implements synthesized drum voices (kick, snare, hi-hat, clap) using Web Audio API oscillators, noise generators, and envelopes for browser-native audio playback.",
+  "frontend/src/audio/useSequencerAudio.ts": "Custom hook managing Web Audio sequencer engine with lookahead scheduling, playback control, BPM updates, and per-track volume/mute handling.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for backend operations including user profile management (get/save) and pattern operations (get all, save, load) with proper caching and invalidation.",
+  "frontend/src/components/layout/AppShell.tsx": "Layout wrapper component providing background pattern, header, main content area, and footer with caffeine.ai attribution.",
+  "frontend/src/components/layout/AppHeader.tsx": "Application header displaying logo, help dialog trigger, user profile name when authenticated, and login/logout button.",
+  "frontend/src/components/help/HelpPanel.tsx": "Help content component explaining how to create beats, manage patterns, save/load functionality, and tips for using the sequencer.",
+  "frontend/src/components/auth/LoginButton.tsx": "Authentication button component handling Internet Identity login/logout with proper state management and query cache clearing on logout.",
+  "frontend/src/components/auth/ProfileSetupDialog.tsx": "Modal dialog prompting new users to enter their name on first login, preventing modal flash by checking profile fetch state properly.",
+  "frontend/src/components/sequencer/SequencerWorkspace.tsx": "Main sequencer workspace coordinating TransportControls, StepGrid, TrackList, PatternManager, and CloudSaveLoadPanel with audio engine integration.",
+  "frontend/src/components/sequencer/TransportControls.tsx": "Transport controls component with Play/Stop button and BPM control (input + slider) for tempo adjustment.",
+  "frontend/src/components/sequencer/StepGrid.tsx": "16-step grid component for each track with clickable cells, visual feedback for active steps, and playhead position indicator.",
+  "frontend/src/components/sequencer/TrackList.tsx": "Track control strip displaying track names with mute toggle buttons and volume sliders for each of the four instrument tracks.",
+  "frontend/src/components/patterns/PatternManager.tsx": "Pattern management UI with pattern selector dropdown, new pattern creation, and inline pattern renaming functionality.",
+  "frontend/src/components/patterns/CloudSaveLoadPanel.tsx": "Cloud save/load interface showing authentication requirement when logged out, and save/load controls with pattern selection when authenticated.",
+  "frontend/src/index.css": "Global styles with retro-funk OKLCH color system featuring vibrant purple-magenta primary, warm orange secondary, and electric cyan accent in both light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending theme with retro-funk color tokens, custom glow shadows, and pulse-glow animation for the funk aesthetic."
+}
